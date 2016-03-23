@@ -19,7 +19,7 @@ public class GameFrame extends JFrame
 	{
 		this.setContentPane(basePanel);
 		this.setSize(575,400);
-		this.setTitle("Chatbot");
+		this.setTitle("Rock Paper Scissors");
 		this.setResizable(false);
 		this.setVisible(true);
 	}

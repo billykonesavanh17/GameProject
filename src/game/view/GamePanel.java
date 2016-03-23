@@ -11,6 +11,8 @@ public class GamePanel extends JPanel
 	private JButton rockButton;
 	private JButton scissorsButton;
 	private JButton paperButton;
+	private JButton PVPButton;
+	private JButton CPUButton;
 	private SpringLayout baseLayout;
 	private JTextArea gameArea;
 	private JScrollPane gamePane;
@@ -19,8 +21,20 @@ public class GamePanel extends JPanel
 	{
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
+		rockButton = new JButton("Rock");
 		scissorsButton = new JButton("SCISSORS");
+		baseLayout.putConstraint(SpringLayout.NORTH, rockButton, 0, SpringLayout.NORTH, scissorsButton);
+		baseLayout.putConstraint(SpringLayout.SOUTH, scissorsButton, -10, SpringLayout.SOUTH, this);
 		paperButton = new JButton("PAPER");
+		baseLayout.putConstraint(SpringLayout.EAST, rockButton, -6, SpringLayout.WEST, paperButton);
+		baseLayout.putConstraint(SpringLayout.NORTH, paperButton, 0, SpringLayout.NORTH, scissorsButton);
+		baseLayout.putConstraint(SpringLayout.EAST, paperButton, -6, SpringLayout.WEST, scissorsButton);
+		PVPButton = new JButton("PVP");
+		baseLayout.putConstraint(SpringLayout.NORTH, PVPButton, 0, SpringLayout.NORTH, scissorsButton);
+		baseLayout.putConstraint(SpringLayout.EAST, PVPButton, -6, SpringLayout.WEST, rockButton);
+		CPUButton = new JButton("CPU");
+		baseLayout.putConstraint(SpringLayout.NORTH, CPUButton, 0, SpringLayout.NORTH, scissorsButton);
+		baseLayout.putConstraint(SpringLayout.EAST, CPUButton, -6, SpringLayout.WEST, PVPButton);
 		
 		setupGamePane();
 		setupPanel();
@@ -43,25 +57,21 @@ public class GamePanel extends JPanel
 		this.add(scissorsButton);
 		this.add(paperButton);
 		this.add(gamePane);
-		rockButton = new JButton("ROCK");
-		add(rockButton);
+		this.add(PVPButton);
+		this.add(CPUButton);
+		this.add(rockButton);
 		gameArea = new JTextArea(10, 15);
-		add(gameArea);
+		baseLayout.putConstraint(SpringLayout.EAST, scissorsButton, 0, SpringLayout.EAST, gameArea);
+		this.add(gameArea);
 		gameArea.setEnabled(false);
 	}
 	
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.NORTH, scissorsButton, 0, SpringLayout.NORTH, paperButton);
-		baseLayout.putConstraint(SpringLayout.WEST, scissorsButton, 31, SpringLayout.EAST, paperButton);
-		baseLayout.putConstraint(SpringLayout.EAST, paperButton, -188, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, paperButton, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, gameArea, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.EAST, gameArea, -10, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, gameArea, 10, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, gameArea, 235, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, rockButton, -10, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.EAST, rockButton, -34, SpringLayout.WEST, paperButton);
 	}
 	
 	private void setupListeners()
@@ -73,5 +83,6 @@ public class GamePanel extends JPanel
 				
 			}
 		});
+	}
 	
 }
